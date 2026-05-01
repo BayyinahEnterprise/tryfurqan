@@ -314,6 +314,7 @@
       margin: 0.5rem 0 1rem;
     }
     .paper-anchor + .paper { border-top: 1px dashed var(--rule); padding-top: 1.1rem; }
+    .paper-anchor + .paper-anchor { margin-top: 0.85rem; }
     .paper-title {
       font-family: var(--fd);
       font-weight: 500;
@@ -507,22 +508,31 @@
         <div class="body-copy">
           <p>
             Furqan is the architecture layer of a published research program.
-            The protocol that names the failure mode, the language that
-            enforces it at compile time, and the input-layer applications
-            that put the protocol into production. Every paper carries a
-            permanent Zenodo DOI and an auditable claim against a named null
+            <strong>The Munafiq Protocol names the failure mode</strong> RLHF
+            and Constitutional AI do not address: a system can be Compliant
+            without being Aligned. Furqan is the language that turns that
+            protocol into a compile-time check. The cross-text empirical
+            paper grounds both in measured structural properties of the
+            source corpus, not in metaphor. Every paper carries a permanent
+            Zenodo DOI and an auditable claim against a named null
             hypothesis.
           </p>
         </div>
 
         <div class="papers-block">
 
-          <div class="layer-mark">Layer 1 &middot; The Protocol</div>
+          <div class="layer-mark">Layer 1 &middot; The Protocol &amp; Its Empirical Foundation</div>
 
-          <article class="paper">
+          <article class="paper paper-anchor">
             <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19700420" target="_blank" rel="noopener">Detecting Performed Alignment in Artificial Systems: The Munafiq Protocol</a></h3>
             <div class="paper-meta">10.5281/zenodo.19700420 &middot; v2.1 &middot; 2026-04-22 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
-            <p class="paper-abstract">The anchor paper. Names the failure mode RLHF, Constitutional AI, and helpfulness training do not address: a system can be Compliant (outputs the trainer rewards) without being Aligned (depth state matches surface presentation). Furqan inherits its surface-depth verdict surface and four-process taxonomy from this protocol.</p>
+            <p class="paper-abstract"><strong>The protocol everything else inherits from.</strong> Names the failure mode RLHF, Constitutional AI, and helpfulness training do not address: a system can be Compliant (outputs the trainer rewards) without being Aligned (depth state matches surface presentation). Introduces the four-process taxonomy and the surface-depth verdict surface. Furqan&rsquo;s nine compile-time checkers, Bayyinah&rsquo;s document-scanner verdicts, and every downstream application in this corpus inherit their diagnostic vocabulary from this paper.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19961267" target="_blank" rel="noopener">Cross-Text Computational Linguistics: Structural Properties of the Quran, Hadith Collections, and the Hebrew Bible Under TF-IDF Cosine Analysis</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19961267 &middot; v1.1 &middot; 2026-05-01 &middot; Arfeen, Ashraf, Claude Opus (Anthropic), Grok (xAI), Computer (Perplexity)</div>
+            <p class="paper-abstract"><strong>The empirical foundation.</strong> Applies a uniform computational pipeline (TF-IDF cosine, Fibonacci additive growth, Hurst R/S persistence, lag-20 autocorrelation) to five corpora across two language families. Three layers of structural difference are reported as measurements, not metaphor: Fibonacci additive semantic growth is a Classical Arabic compiled-text property shared by the Quran and all three hadith collections (p &lt; 0.001) and absent in the Hebrew Bible (p = 0.44); long-range persistence by Hurst exponent distinguishes the Quran (H = 0.996, p = 0.003) from the hadith collections (H = 0.68 to 0.80, p &gt;= 0.19); and the lag-20 autocorrelation sign-flip separates positive thematic continuity in the Quran (+0.53) from negative alternation in the Hebrew Bible (-0.42). The paper falsifies its own original Quran-specific Fibonacci hypothesis on contact with the hadith data, reconciles two pipelines that produced contradictory Hebrew Bible results, and reports five honest caveats. This is the measured structural ground from which Furqan&rsquo;s type system and the Munafiq Protocol are derived.</p>
           </article>
 
           <div class="layer-mark">Layer 2 &middot; The Architecture</div>
