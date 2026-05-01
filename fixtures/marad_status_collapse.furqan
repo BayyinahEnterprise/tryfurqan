@@ -1,0 +1,34 @@
+// Example #2 - canonical D11 status collapse.
+//
+// `deep_scan` is a producer (returns Integrity | Incomplete and
+// honestly handles both arms). `summarize` calls `deep_scan` but
+// declares `-> Integrity` (bare). The possibility of incompleteness
+// is silently narrowed away at `summarize`'s signature - its
+// callers never learn that the underlying scan might be incomplete.
+//
+// Run:    furqan check examples/status_collapse.furqan
+// Expect: MARAD from status_coverage (Case S1)
+
+bismillah Collapsed {
+    authority: NAMING_MD
+    serves: purpose_hierarchy.balance_for_living_systems
+    scope: scan
+    not_scope: nothing_excluded
+}
+
+fn deep_scan() -> Integrity | Incomplete {
+    if not corrupted {
+        return Integrity
+    } else {
+        return Incomplete {
+            reason: "corrupted",
+            max_confidence: 0.5,
+            partial_findings: empty_list
+        }
+    }
+}
+
+fn summarize() -> Integrity {
+    deep_scan()
+    return Integrity
+}

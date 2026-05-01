@@ -1,0 +1,26 @@
+// Advisory fixture: empty tanzil block.
+//
+// The module passes structurally (no marads) but the empty
+// tanzil block produces a T3 informational advisory.
+
+bismillah AdvisoryDemo {
+    authority: NAMING_MD
+    serves: purpose_hierarchy.balance_for_living_systems
+    scope: scan
+    not_scope: nothing_excluded
+}
+
+tanzil AdvisoryDemo {
+}
+
+fn scan() -> Integrity | Incomplete {
+    if not missing {
+        return Integrity
+    } else {
+        return Incomplete {
+            reason: "input not supplied",
+            max_confidence: 0.5,
+            partial_findings: empty_list
+        }
+    }
+}

@@ -1,0 +1,15 @@
+// Parse error fixture: missing closing brace, dangling token.
+//
+// The tokenizer will reach EOF mid-block and report a parse failure.
+// All structural checkers are skipped because they require a
+// well-formed AST.
+
+bismillah BrokenSyntax {
+    authority: NAMING_MD
+    serves: purpose_hierarchy.balance_for_living_systems
+    scope: scan
+    not_scope: nothing_excluded
+
+fn scan() -> Integrity {
+    return Integrity
+}

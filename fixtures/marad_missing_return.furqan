@@ -1,0 +1,27 @@
+// Example #3 - canonical D24 missing-return-path.
+//
+// `scan` declares a return type and has a return statement (so
+// ring-close R3 stays silent), but the return is inside an `if`
+// with no `else` and no trailing return after the block. When the
+// condition is false, the function falls through with no return -
+// the signature lies on at least one path.
+//
+// Run:    furqan check examples/missing_return_path.furqan
+// Expect: MARAD from all_paths_return (Case P1)
+
+bismillah FallThrough {
+    authority: NAMING_MD
+    serves: purpose_hierarchy.balance_for_living_systems
+    scope: scan
+    not_scope: nothing_excluded
+}
+
+fn scan() -> Integrity | Incomplete {
+    if not path {
+        return Incomplete {
+            reason: "missing",
+            max_confidence: 0.5,
+            partial_findings: empty_list
+        }
+    }
+}

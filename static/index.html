@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Furqan: A Programming-Language Type-Checker for Structural Honesty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Furqan is a programming-language type-checker that rejects code shapes which promise more than the program can actually deliver. Compile-time, deterministic, no model in the loop.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Furqan">
+  <meta property="og:title" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
+  <meta property="og:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. Furqan makes that shape uncompilable.">
+  <meta property="og:url" content="https://tryfurqan.com/">
+  <meta property="og:image" content="https://tryfurqan.com/og-tryfurqan.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
+  <meta name="twitter:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. Furqan makes that shape uncompilable.">
+  <meta name="twitter:image" content="https://tryfurqan.com/og-tryfurqan.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #0F1115;
+      --bg-2:      #161A21;
+      --bg-3:      #1D2229;
+      --rule:      #262C36;
+      --rule-2:    #353D4A;
+
+      --vellum:    #E8E4D8;
+      --vellum-dim:#C7C3B5;
+
+      --ink:       #E8E4D8;
+      --ink-2:     #B5B0A2;
+      --muted:     #6F7684;
+      --faint:     #4A515E;
+
+      --lamp:      #F4D58A;
+      --lamp-soft: rgba(244, 213, 138, 0.16);
+      --lamp-glow: rgba(244, 213, 138, 0.55);
+
+      --t1: #E2725B;
+      --t1-soft: rgba(226, 114, 91, 0.14);
+      --t2: #7AA0C4;
+      --t2-soft: rgba(122, 160, 196, 0.14);
+      --t3: #B89B7A;
+      --ok: #8FBF95;
+
+      --fd: 'Source Serif 4', 'Times New Roman', serif;
+      --fs: 'Inter', system-ui, -apple-system, sans-serif;
+      --fm: 'JetBrains Mono', ui-monospace, monospace;
+
+      --ease: cubic-bezier(0.32, 0.72, 0.24, 1.0);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fs);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--lamp); text-decoration: none; transition: opacity 200ms var(--ease); }
+    a:hover { opacity: 0.78; }
+
+    .page {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+      gap: 3rem;
+    }
+
+    .margin-index {
+      position: sticky;
+      top: 3rem;
+      align-self: start;
+      border-right: 1px solid var(--rule);
+      padding-right: 1.5rem;
+    }
+    .brand-mark {
+      font-family: var(--fd);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--vellum);
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+    .brand-mark a { color: inherit; }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed var(--rule);
+    }
+    .meta-row .k { color: var(--muted); }
+    .meta-row .v { color: var(--ink-2); }
+
+    .nav-list {
+      margin-top: 2.5rem;
+      list-style: none;
+    }
+    .nav-list li {
+      font-family: var(--fm);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0;
+    }
+    .nav-list a { color: var(--ink-2); }
+    .nav-list a:hover { color: var(--lamp); opacity: 1; }
+
+    main { min-width: 0; }
+
+    section { margin-bottom: 4rem; }
+    section:last-child { margin-bottom: 0; }
+
+    .section-mark {
+      font-family: var(--fm);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lamp);
+      margin-bottom: 1.25rem;
+    }
+    .section-mark .sep { color: var(--faint); margin: 0 0.5rem; }
+
+    h1 {
+      font-family: var(--fd);
+      font-weight: 500;
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--vellum);
+      margin-bottom: 1.4rem;
+      max-width: 24ch;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--lamp);
+    }
+
+    h2 {
+      font-family: var(--fd);
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--vellum);
+      margin-bottom: 1rem;
+      max-width: 28ch;
+    }
+    h2 em { font-style: italic; color: var(--lamp); }
+
+    .lede {
+      font-family: var(--fd);
+      font-size: 1.12rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 60ch;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .body-copy {
+      font-size: 0.98rem;
+      color: var(--ink-2);
+      max-width: 60ch;
+      margin-bottom: 1.75rem;
+    }
+    .body-copy p + p { margin-top: 0.85rem; }
+    .body-copy strong { color: var(--vellum); font-weight: 500; }
+
+    .install-block {
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--lamp);
+      border-radius: 3px;
+      padding: 1rem 1.15rem;
+      margin: 1.5rem 0 2rem;
+      max-width: 60ch;
+      font-family: var(--fm);
+      font-size: 0.86rem;
+      color: var(--ink);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .install-block .prompt { color: var(--muted); user-select: none; }
+    .install-block .comment { color: var(--muted); }
+
+    .cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.65rem 1.05rem;
+      border-radius: 3px;
+      font-family: var(--fm);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 200ms var(--ease), border-color 200ms var(--ease);
+    }
+    .cta-primary {
+      background: var(--lamp);
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+    .cta-primary:hover { opacity: 0.86; }
+    .cta-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--rule-2);
+    }
+    .cta-secondary:hover {
+      border-color: var(--lamp);
+      color: var(--lamp);
+      opacity: 1;
+    }
+
+    .verdict-table {
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.25rem 0 0;
+      max-width: 60ch;
+    }
+    .verdict-row {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0.85rem;
+      align-items: baseline;
+      padding: 0.55rem 0;
+      border-top: 1px dashed var(--rule);
+    }
+    .verdict-row:first-child { border-top: none; padding-top: 0.2rem; }
+    .verdict-tag {
+      font-family: var(--fm);
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .verdict-tag.pass     { color: var(--ok); }
+    .verdict-tag.marad    { color: var(--t1); }
+    .verdict-tag.advisory { color: var(--t3); }
+    .verdict-tag.parse    { color: var(--muted); }
+    .verdict-action {
+      font-family: var(--fd);
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .verdict-action strong {
+      font-style: normal;
+      font-family: var(--fs);
+      font-weight: 500;
+      color: var(--vellum);
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      font-family: var(--fm);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+    .footer-note strong { color: var(--ink-2); font-weight: 500; }
+    .footer-note p + p { margin-top: 0.6rem; }
+
+    @media (max-width: 760px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.25rem 4rem;
+        gap: 2rem;
+      }
+      .margin-index {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding-right: 0;
+        padding-bottom: 1.5rem;
+      }
+      .verdict-row {
+        grid-template-columns: 6.5rem 1fr;
+      }
+      h1 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <aside class="margin-index">
+      <div class="brand-mark"><a href="/">furqan</a></div>
+
+      <div class="meta-row"><span class="k">Phase</span><span class="v">2</span></div>
+      <div class="meta-row"><span class="k">Version</span><span class="v">v0.10.1</span></div>
+      <div class="meta-row"><span class="k">Tests</span><span class="v">527</span></div>
+      <div class="meta-row"><span class="k">Checkers</span><span class="v">9</span></div>
+      <div class="meta-row"><span class="k">Deps</span><span class="v">0</span></div>
+
+      <ul class="nav-list">
+        <li><a href="#thesis">Thesis</a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#verdicts">Verdicts</a></li>
+        <li><a href="/demo">Live demo</a></li>
+      </ul>
+    </aside>
+
+    <main>
+
+      <section id="hero">
+        <div class="section-mark">&sect; Furqan<span class="sep">&middot;</span>Honest by Construction</div>
+
+        <h1>Code that <em>promises more than it can deliver</em>, refused at compile time.</h1>
+
+        <p class="lede">
+          Furqan is a programming-language type-checker. It rejects function
+          shapes whose signature is wider than what the body can honestly
+          return. The discipline is static, syntactic, deterministic, and
+          runs in milliseconds with no model in the loop.
+        </p>
+      </section>
+
+      <section id="thesis">
+        <div class="section-mark">&sect; Thesis</div>
+
+        <div class="body-copy">
+          <p>
+            A meaningful fraction of code-level "AI hallucination" has the
+            same shape as a long-known software defect: a function declares
+            it returns a complete answer about an input the program cannot
+            fully process. Furqan makes that shape <strong>structurally
+            uncompilable.</strong>
+          </p>
+          <p>
+            When a function declares it returns <code>Integrity</code> but
+            the input may be unreadable (an encrypted PDF, a partial scan, a
+            missing field), the function must either rule out the
+            unreadability before promising completeness, or return an
+            <code>Incomplete</code> result with a reason and a confidence
+            bound. Most languages do not enforce this. Furqan does.
+          </p>
+          <p>
+            Nine checkers run in sequence: bismillah scope, zahir/batin,
+            mizan calibration, tanzil build ordering, ring-close,
+            scan-incomplete, status-coverage, return-type-match, and
+            all-paths-return. Diagnostics name the rule violated, the line
+            it occurred on, and the minimal fix.
+          </p>
+        </div>
+      </section>
+
+      <section id="install">
+        <div class="section-mark">&sect; Install</div>
+
+        <h2>One <em>pip install</em>, no runtime dependencies.</h2>
+
+        <div class="install-block"><span class="prompt">$ </span>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language
+
+<span class="comment"># or, from a clone</span>
+<span class="prompt">$ </span>git clone https://github.com/BayyinahEnterprise/furqan-programming-language
+<span class="prompt">$ </span>cd furqan-programming-language
+<span class="prompt">$ </span>pip install -e .
+<span class="prompt">$ </span>python -m furqan check examples/clean_module.furqan</div>
+
+        <div class="cta-row">
+          <a class="cta cta-primary" href="/demo">Run the live demo</a>
+          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="cta cta-secondary" href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Read the paper</a>
+        </div>
+      </section>
+
+      <section id="verdicts">
+        <div class="section-mark">&sect; Verdicts</div>
+
+        <h2>Four states, <em>one of them clean</em>.</h2>
+
+        <div class="body-copy">
+          <p>
+            The checker emits one of four verdicts per module. The first
+            three carry diagnostics. Only PASS is silent.
+          </p>
+        </div>
+
+        <div class="verdict-table">
+          <div class="verdict-row">
+            <span class="verdict-tag pass">PASS</span>
+            <span class="verdict-action"><strong>All nine checkers ran.</strong> Zero marads, zero advisories. The module is structurally honest.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag marad">MARAD</span>
+            <span class="verdict-action"><strong>At least one structural violation.</strong> Each marad names the checker, the diagnosis, and the minimal fix.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag advisory">ADVISORY</span>
+            <span class="verdict-action"><strong>Informational findings only.</strong> The module passes, but the compiler has notes worth reading.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag parse">PARSE ERROR</span>
+            <span class="verdict-action"><strong>The source could not be parsed.</strong> Reported with line and column. No checker runs on a broken AST.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        <p>
+          <strong>Furqan</strong> is the Phase 2 prototype type-checker. It
+          enforces a minimal subset of the surface syntax against the
+          paper's structural-honesty primitives. Zero runtime dependencies,
+          Python 3.10+, MIT-licensed.
+        </p>
+        <p>
+          Sister project: <a href="https://bayyinah.dev">Bayyinah</a>, the
+          file-integrity scanner that applies the same discipline at the
+          input layer of an AI pipeline.
+        </p>
+      </div>
+
+    </main>
+
+  </div>
+</body>
+</html>

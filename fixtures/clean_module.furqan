@@ -1,0 +1,29 @@
+// Example #1 - clean module that passes every checker.
+//
+// Demonstrates the canonical "honest" shape:
+//   - bismillah block declares scope explicitly
+//   - a producer function returns Integrity | Incomplete
+//   - both arms are produced via if/else (path coverage exact)
+//   - the Incomplete literal carries all three required fields
+//
+// Run:    furqan check examples/clean_module.furqan
+// Expect: PASS, 9 checkers ran, zero diagnostics
+
+bismillah CleanModule {
+    authority: NAMING_MD
+    serves: purpose_hierarchy.balance_for_living_systems
+    scope: scan
+    not_scope: nothing_excluded
+}
+
+fn scan() -> Integrity | Incomplete {
+    if not missing {
+        return Integrity
+    } else {
+        return Incomplete {
+            reason: "input not supplied",
+            max_confidence: 0.5,
+            partial_findings: empty_list
+        }
+    }
+}
