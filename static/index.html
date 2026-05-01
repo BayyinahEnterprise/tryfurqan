@@ -21,6 +21,13 @@
   <meta name="twitter:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. Furqan makes that shape uncompilable.">
   <meta name="twitter:image" content="https://tryfurqan.com/og-tryfurqan.png">
 
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-wpPb5sw3dDTXJ-MVP_a_T.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -278,6 +285,69 @@
       color: var(--vellum);
     }
 
+    .papers-block {
+      max-width: 60ch;
+      margin-top: 1.5rem;
+    }
+    .layer-mark {
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lamp);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px dashed var(--rule);
+    }
+    .layer-mark:first-child { margin-top: 0; }
+    .paper {
+      padding: 1.1rem 0 1.25rem;
+      border-top: 1px dashed var(--rule);
+    }
+    .paper:first-of-type { border-top: none; padding-top: 0.5rem; }
+    .paper-anchor {
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--lamp);
+      border-radius: 3px;
+      padding: 1.1rem 1.25rem 1.25rem;
+      margin: 0.5rem 0 1rem;
+    }
+    .paper-anchor + .paper { border-top: 1px dashed var(--rule); padding-top: 1.1rem; }
+    .paper-title {
+      font-family: var(--fd);
+      font-weight: 500;
+      font-size: 1.04rem;
+      line-height: 1.32;
+      color: var(--vellum);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.005em;
+    }
+    .paper-title a { color: inherit; }
+    .paper-title a:hover { color: var(--lamp); opacity: 1; }
+    .paper-meta {
+      font-family: var(--fm);
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin-bottom: 0.55rem;
+    }
+    .paper-abstract {
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+    .papers-foot {
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      max-width: 60ch;
+      font-family: var(--fm);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+    .papers-foot .sep { color: var(--faint); margin: 0 0.5rem; }
+
     .footer-note {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -328,6 +398,7 @@
         <li><a href="#thesis">Thesis</a></li>
         <li><a href="#install">Install</a></li>
         <li><a href="#verdicts">Verdicts</a></li>
+        <li><a href="#research">Research</a></li>
         <li><a href="/demo">Live demo</a></li>
       </ul>
     </aside>
@@ -425,6 +496,105 @@
             <span class="verdict-tag parse">PARSE ERROR</span>
             <span class="verdict-action"><strong>The source could not be parsed.</strong> Reported with line and column. No checker runs on a broken AST.</span>
           </div>
+        </div>
+      </section>
+
+      <section id="research">
+        <div class="section-mark">&sect; Research</div>
+
+        <h2>The corpus is <em>open</em>.</h2>
+
+        <div class="body-copy">
+          <p>
+            Furqan is the architecture layer of a published research program.
+            The protocol that names the failure mode, the language that
+            enforces it at compile time, and the input-layer applications
+            that put the protocol into production. Every paper carries a
+            permanent Zenodo DOI and an auditable claim against a named null
+            hypothesis.
+          </p>
+        </div>
+
+        <div class="papers-block">
+
+          <div class="layer-mark">Layer 1 &middot; The Protocol</div>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19700420" target="_blank" rel="noopener">Detecting Performed Alignment in Artificial Systems: The Munafiq Protocol</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19700420 &middot; v2.1 &middot; 2026-04-22 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The anchor paper. Names the failure mode RLHF, Constitutional AI, and helpfulness training do not address: a system can be Compliant (outputs the trainer rewards) without being Aligned (depth state matches surface presentation). Furqan inherits its surface-depth verdict surface and four-process taxonomy from this protocol.</p>
+          </article>
+
+          <div class="layer-mark">Layer 2 &middot; The Architecture</div>
+
+          <article class="paper paper-anchor">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19776584" target="_blank" rel="noopener">Furqan: A Programming Language with Structural Honesty, Calibrated Optimization, and Surface-Depth Type Verification Derived from Quranic Computational Architecture</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19776584 &middot; 2026-04-25 &middot; Ashraf, Arfeen, Claude (Anthropic), Computer (Perplexity), Grok (xAI)</div>
+            <p class="paper-abstract">The defining paper for this site. A programming language whose type system, module architecture, and build constraints are derived from structural properties of the Quran. Where contemporary languages ask developers to write honest code as a behavioral expectation, Furqan makes structural honesty a property of the type system, so surface-depth divergence becomes a type error rather than a code-review concern.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19776577" target="_blank" rel="noopener">Al-Khalifa: A Furqan-Based Super Agent Architecture for Structurally Honest Autonomous Project Stewardship</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19776577 &middot; 2026-04-25 &middot; Arfeen, Claude (Anthropic), Computer (Perplexity), Grok (xAI). Additional contributors named on the DOI page.</div>
+            <p class="paper-abstract">Applies Furqan&rsquo;s seven compile-time primitives as seven runtime constraints on an autonomous agent. Where AutoGPT, CrewAI, LangChain agents, and Devin decompose tasks but cannot verify whether they are building the right thing versus performing the appearance of building, Al-Khalifa is architected so the surface-depth gap is checked at every step of the agent&rsquo;s stewardship loop.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19776576" target="_blank" rel="noopener">Bilal: An Honest-Autonomous Large Language Model Architecture with Structural Truth Verification, Calibrated Generation, and Purpose-Hierarchy Training Objectives Derived from Quranic Computational Architecture</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19776576 &middot; 2026-04-25 &middot; Arfeen, Claude (Anthropic), Computer (Perplexity), Grok (xAI)</div>
+            <p class="paper-abstract">A model architecture proposal that takes the Munafiq Protocol&rsquo;s structural-honesty constraint and integrates it as a training objective rather than an external evaluation. The long-form answer to the question: what would an LLM look like if alignment were a property of the architecture, not a finetuning target.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19744163" target="_blank" rel="noopener">Structured Revelation as Prompt Architecture</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19744163 &middot; 2026-04-24 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The methodology paper. Demonstrates that gradual revelation, ring composition, lossless morphological compression, and the zahir / batin distinction function as prompt-engineering primitives in human-AI collaborative software development. Validated longitudinally against the development of Bayyinah v1.0.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19746539" target="_blank" rel="noopener">The Fatiha Construct: A Seven-Step Recursive Session Protocol for Human-AI Collaborative Development Derived from Surah al-Fatiha</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19746539 &middot; 2026-04-25 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The session-level companion to Structured Revelation. Each of the seven steps maps to a verse of Surah al-Fatiha with structural, not decorative, correspondence: a calibration check, an orientation check, a deadline-with-skip-rule, a memory-encoding step, and an over-specification guard against the failure mode the paper calls the Cow Episode.</p>
+          </article>
+
+          <div class="layer-mark">Layer 3 &middot; The Application</div>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19745154" target="_blank" rel="noopener">Bayyinah: Detecting Concealed Adversarial Content in Digital Documents. A White Paper Applying the Munafiq Protocol to the Input Layer</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19745154 &middot; 2026-04-24 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The white paper that turns the protocol into a working scanner. Where the Munafiq Protocol diagnoses agents, Bayyinah diagnoses their inputs. Formalizes the relational definition: a document is Performed with respect to a rendering function and an ingestion function when the machine&rsquo;s ingested content carries a payload the human reader&rsquo;s rendered surface does not reveal.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19802455" target="_blank" rel="noopener">Bayyinah as Input-Layer Defense in Artificial-System Safety Pipelines</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19802455 &middot; v1.1 &middot; 2026-04-26 &middot; Arfeen, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The deployment paper. Documents the design, implementation, and adversarial-gauntlet evaluation of Bayyinah as an input-layer defense in production AI pipelines. Twelve file formats, an honest miss list, and the discipline that comes from making every miss a published commitment.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19875931" target="_blank" rel="noopener">Bayyinah al-Maal: Structural Honesty Verification for Financial Filings Using the Munafiq Protocol</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19875931 &middot; 2026-04-29 &middot; Arfeen, Claude Opus (Anthropic), Grok (xAI), Computer (Perplexity)</div>
+            <p class="paper-abstract">The fourth substrate. Carries the Bayyinah architecture from document files to SEC filings (10-K, 10-Q, 8-K, DEF 14A) and on-chain cryptocurrency disclosures. The same divergence the document scanner detects between a rendered surface and an ingested substrate is reframed as the gap between a filing&rsquo;s reported numbers and the economic reality they claim to represent, with detection operating by structural address on XBRL taxonomy elements and blockchain state.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19894724" target="_blank" rel="noopener">Al-Mutaffifin: Structural Integrity Verification for Financial Governance Systems</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19894724 &middot; 2026-04-29 &middot; Arfeen, Claude Opus (Anthropic), Grok (xAI), Computer (Perplexity)</div>
+            <p class="paper-abstract">The fifth substrate. Carries the Munafiq Protocol from filings to financial governance systems: the entity that controls the instruments of measurement and applies them asymmetrically. Introduces the structural signature differentiation framework, five mechanisms that distinguish honest-error structural patterns from directed-manipulation structural patterns without claiming to determine intent. Demonstrated end-to-end on the Lehman Brothers Repo 105 filings.</p>
+          </article>
+
+          <article class="paper">
+            <h3 class="paper-title"><a href="https://doi.org/10.5281/zenodo.19746298" target="_blank" rel="noopener">Bayyinah al-Khabir: A Theoretical Framework for Information-Layer Integrity Scanning Across National Broadcast Sources Using Performed-Alignment Diagnostics</a></h3>
+            <div class="paper-meta">10.5281/zenodo.19746298 &middot; 2026-04-24 &middot; Arfeen, Ashraf, Claude (Anthropic), Grok (xAI)</div>
+            <p class="paper-abstract">The horizon paper. Extends the Bayyinah architecture from documents to information sources: where Bayyinah detects performed alignment in a single document, al-Khabir detects performed alignment in a source&rsquo;s reporting on a specific event measured against the cross-source evidence base across multiple national contexts. Currently theoretical; the protocol scaffolding is published so the implementation that follows can be measured against the framework, not against itself.</p>
+          </article>
+
+        </div>
+
+        <div class="papers-foot">
+          <a href="https://github.com/BayyinahEnterprise" target="_blank" rel="noopener">Read the full research index on GitHub</a>
+          <span class="sep">&middot;</span>
+          <a href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Browse all deposits on Zenodo</a>
         </div>
       </section>
 
