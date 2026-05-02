@@ -119,7 +119,7 @@ def main() -> int:
               "Compile-time. Deterministic. Zero runtime dependencies.",
               font=lede_font, fill=INK_2)
 
-    # Bottom meta row: tryfurqan.com  v0.10.1  527 tests  Phase 2
+    # Bottom meta row: tryfurqan.com  v0.10.1  527 tests  Phase 3
     meta_font = _font(20, mono=True)
     meta_y = panel_y1 - 32
 
@@ -127,7 +127,7 @@ def main() -> int:
     draw.rectangle((panel_x0, meta_y - 18, panel_x1, meta_y - 17), fill=RULE)
 
     left = "TRYFURQAN.COM"
-    right = "v0.10.1   \u00b7   527 TESTS   \u00b7   PHASE 2"
+    right = "v0.10.1   \u00b7   527 TESTS   \u00b7   PHASE 3"
 
     draw.text((panel_x0, meta_y), left, font=meta_font, fill=LAMP)
     right_w = draw.textlength(right, font=meta_font)

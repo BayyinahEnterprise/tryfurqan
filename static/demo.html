@@ -22,7 +22,8 @@
   <meta name="twitter:image" content="https://tryfurqan.com/og-tryfurqan.png">
 
   <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-wpPb5sw3dDTXJ-MVP_a_T.js"></script>
+  <!-- SRI hash pinned to fetch on 2026-05-02; if Plausible updates the script, this will fail-closed (script blocked) - regenerate the hash. -->
+  <script async src="https://plausible.io/js/pa-wpPb5sw3dDTXJ-MVP_a_T.js" integrity="sha384-EBhyvVVjXwlhVe8u7Kn9MY0s+1jGgdTs/GSUWfNV8gV5nqM8Kuu+tKuRj9SjoZo1" crossorigin="anonymous"></script>
   <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
@@ -479,16 +480,68 @@
       h1 { font-size: 1.7rem; }
       .editor-meta { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
     }
+
+    /* No-JS fallback card */
+    .noscript-fallback {
+      max-width: 640px;
+      margin: 3rem auto;
+      padding: 1.5rem 1.75rem;
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      color: var(--ink);
+      font-family: var(--fs);
+      text-align: left;
+    }
+    .noscript-fallback h2 {
+      font-family: var(--fd);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--vellum);
+      margin-bottom: 0.75rem;
+    }
+    .noscript-fallback p {
+      color: var(--ink-2);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+    .noscript-fallback pre {
+      background: var(--bg-3);
+      border: 1px solid var(--rule);
+      padding: 0.85rem 1rem;
+      font-family: var(--fm);
+      font-size: 0.82rem;
+      color: var(--vellum);
+      white-space: pre-wrap;
+      word-break: break-all;
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
+    .noscript-fallback a {
+      color: var(--lamp);
+      text-decoration: none;
+      border-bottom: 1px solid var(--lamp-soft);
+    }
+    .noscript-fallback a:hover { border-bottom-color: var(--lamp); }
   </style>
 </head>
 
 <body>
+  <noscript>
+    <div class="noscript-fallback">
+      <h2>JavaScript is disabled</h2>
+      <p>Disable JS? Run <code>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language@v0.10.1 &amp;&amp; python -m furqan check examples/clean_module.furqan</code> locally - same checker, same verdict.</p>
+      <pre>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language@v0.10.1 &amp;&amp; python -m furqan check examples/clean_module.furqan</pre>
+      <p><a href="https://github.com/BayyinahEnterprise/furqan-programming-language" rel="noopener">View the package on GitHub</a></p>
+    </div>
+  </noscript>
   <div class="page">
 
     <aside class="margin-index">
       <div class="brand-mark"><a href="/">furqan</a></div>
 
-      <div class="meta-row"><span class="k">Phase</span><span class="v">2</span></div>
+      <div class="meta-row"><span class="k">Phase</span><span class="v">3</span></div>
       <div class="meta-row"><span class="k">Version</span><span class="v">v0.10.1</span></div>
       <div class="meta-row"><span class="k">Tests</span><span class="v">527</span></div>
       <div class="meta-row"><span class="k">Checkers</span><span class="v">9</span></div>
