@@ -103,18 +103,25 @@ def version() -> dict[str, str]:
 # Static surfaces (landing + demo)
 # ---------------------------------------------------------------------------
 
+_NO_CACHE_HEADERS = {
+    "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
+    "Pragma": "no-cache",
+    "Expires": "0",
+}
+
+
 @app.get("/", response_class=HTMLResponse)
 def index() -> HTMLResponse:
     """Editorial landing page."""
     html = (_STATIC_DIR / "index.html").read_text(encoding="utf-8")
-    return HTMLResponse(content=html)
+    return HTMLResponse(content=html, headers=_NO_CACHE_HEADERS)
 
 
 @app.get("/demo", response_class=HTMLResponse)
 def demo_page() -> HTMLResponse:
     """Editorial demo page."""
     html = (_STATIC_DIR / "demo.html").read_text(encoding="utf-8")
-    return HTMLResponse(content=html)
+    return HTMLResponse(content=html, headers=_NO_CACHE_HEADERS)
 
 
 @app.get("/demo/demo.js")
