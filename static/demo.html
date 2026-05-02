@@ -455,30 +455,58 @@
     }
     .footer-note strong { color: var(--ink-2); font-weight: 500; }
 
-    @media (max-width: 760px) {
+    @media (max-width: 880px) {
       .page {
-        grid-template-columns: 1fr;
-        padding: 2rem 1.25rem 4rem;
-        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.5rem 1rem 3rem;
+        gap: 1.25rem;
       }
       .margin-index {
-        position: static;
+        position: relative;
+        top: 0;
+        align-self: auto;
+        height: auto;
         border-right: none;
         border-bottom: 1px solid var(--rule);
-        padding-right: 0;
-        padding-bottom: 1.5rem;
+        padding: 0 0 1rem 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem 1rem;
       }
-      .nav-back { margin-top: 1rem; }
-      .lit-page { padding: 1.5rem 1.25rem; }
+      .margin-index .brand-mark {
+        margin-bottom: 0;
+        font-size: 1.2rem;
+      }
+      .margin-index .meta-row,
+      .margin-index .nav-list {
+        display: none;
+      }
+      .nav-back {
+        margin-top: 0;
+        margin-left: auto;
+        font-size: 0.7rem;
+      }
+      main { padding-top: 0.25rem; }
+      section { margin-bottom: 2.5rem; }
+      h1 {
+        font-size: clamp(1.55rem, 6vw, 1.95rem);
+        max-width: 100%;
+      }
+      h2 { max-width: 100%; }
+      .lit-page { padding: 1.25rem 1rem; }
       .exhibits { grid-template-columns: 1fr; }
       .verdict-row {
-        grid-template-columns: 6.5rem 1fr;
+        grid-template-columns: 5.5rem 1fr;
         row-gap: 0.15rem;
+        gap: 0.6rem;
       }
       .verdict-arrow { display: none; }
-      .verdict-action { grid-column: 1 / -1; padding-left: 0; font-size: 0.82rem; }
-      h1 { font-size: 1.7rem; }
+      .verdict-action { grid-column: 1 / -1; padding-left: 0; font-size: 0.84rem; }
       .editor-meta { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+      .cta-row .cta { flex: 1 1 auto; justify-content: center; text-align: center; }
+      .meta-strip { gap: 0.5rem 1rem; font-size: 0.7rem; }
     }
 
     /* No-JS fallback card */

@@ -363,23 +363,50 @@
     .footer-note strong { color: var(--ink-2); font-weight: 500; }
     .footer-note p + p { margin-top: 0.6rem; }
 
-    @media (max-width: 760px) {
+    @media (max-width: 880px) {
       .page {
-        grid-template-columns: 1fr;
-        padding: 2rem 1.25rem 4rem;
-        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.5rem 1rem 3rem;
+        gap: 1.25rem;
       }
       .margin-index {
-        position: static;
+        position: relative;
+        top: 0;
+        align-self: auto;
+        height: auto;
         border-right: none;
         border-bottom: 1px solid var(--rule);
-        padding-right: 0;
-        padding-bottom: 1.5rem;
+        padding: 0 0 1rem 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem 1rem;
       }
-      .verdict-row {
-        grid-template-columns: 6.5rem 1fr;
+      .margin-index .brand-mark {
+        margin-bottom: 0;
+        font-size: 1.2rem;
       }
-      h1 { font-size: 1.75rem; }
+      .margin-index .meta-row,
+      .margin-index .nav-list {
+        display: none;
+      }
+      main { padding-top: 0.25rem; }
+      section { margin-bottom: 2.5rem; }
+      h1 {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        max-width: 100%;
+      }
+      h2 { max-width: 100%; }
+      .lede, .body-copy, .install-block, .verdict-table,
+      .papers-block, .papers-foot, .footer-note {
+        max-width: 100%;
+      }
+      .install-block { font-size: 0.78rem; padding: 0.85rem 1rem; }
+      .cta-row .cta { flex: 1 1 auto; justify-content: center; text-align: center; }
+      .verdict-row { grid-template-columns: 5.5rem 1fr; gap: 0.6rem; }
+      .verdict-action { font-size: 0.86rem; }
+      .paper-anchor { padding: 0.95rem 1rem 1.05rem; }
     }
   </style>
 </head>
