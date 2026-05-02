@@ -22,7 +22,8 @@
   <meta name="twitter:image" content="https://tryfurqan.com/og-tryfurqan.png">
 
   <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-wpPb5sw3dDTXJ-MVP_a_T.js"></script>
+  <!-- SRI hash pinned to fetch on 2026-05-02; if Plausible updates the script, this will fail-closed (script blocked) - regenerate the hash. -->
+  <script async src="https://plausible.io/js/pa-wpPb5sw3dDTXJ-MVP_a_T.js" integrity="sha384-EBhyvVVjXwlhVe8u7Kn9MY0s+1jGgdTs/GSUWfNV8gV5nqM8Kuu+tKuRj9SjoZo1" crossorigin="anonymous"></script>
   <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
@@ -389,7 +390,7 @@
     <aside class="margin-index">
       <div class="brand-mark"><a href="/">furqan</a></div>
 
-      <div class="meta-row"><span class="k">Phase</span><span class="v">2</span></div>
+      <div class="meta-row"><span class="k">Phase</span><span class="v">3</span></div>
       <div class="meta-row"><span class="k">Version</span><span class="v">v0.10.1</span></div>
       <div class="meta-row"><span class="k">Tests</span><span class="v">527</span></div>
       <div class="meta-row" title="9 of 10 checker modules run in single-file mode. The additive checker requires a prior version for comparison."><span class="k">Checkers</span><span class="v">9 / 10</span></div>
@@ -453,10 +454,11 @@
 
         <h2>One <em>pip install</em>, no runtime dependencies.</h2>
 
-        <div class="install-block"><span class="prompt">$ </span>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language
+        <div class="install-block"><span class="prompt">$ </span>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language@v0.10.1
 
 <span class="comment"># or, from a clone</span>
 <span class="prompt">$ </span>git clone https://github.com/BayyinahEnterprise/furqan-programming-language
+<span class="comment"># pin to a specific tag with: git checkout v0.10.1</span>
 <span class="prompt">$ </span>cd furqan-programming-language
 <span class="prompt">$ </span>pip install -e .
 <span class="prompt">$ </span>python -m furqan check examples/clean_module.furqan</div>
@@ -610,10 +612,11 @@
 
       <div class="footer-note">
         <p>
-          <strong>Furqan</strong> is the Phase 2 prototype type-checker. It
+          <strong>Furqan</strong> is the Phase 3 multi-module type-checker. It
           enforces a minimal subset of the surface syntax against the
-          paper's structural-honesty primitives. Zero runtime dependencies,
-          Python 3.10+, Apache-2.0 licensed.
+          paper's structural-honesty primitives, with a cross-module build
+          graph for projects that span more than a single file. Zero runtime
+          dependencies, Python 3.10+, Apache-2.0 licensed.
         </p>
         <p>
           Sister project: <a href="https://bayyinah.dev">Bayyinah</a>, the
