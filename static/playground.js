@@ -448,18 +448,45 @@
   }
 
   function pushUrl() {
-    // Mirror state into the URL so deep links work and back/forward
-    // restore. /playground/{lang}[/diff]
-    var path = '/playground/' + state.language;
-    if (state.mode === 'diff') path = '/playground/diff';
-    if (window.location.pathname !== path) {
+    // Mirror state into the URL via query string so the canonical path
+    // stays /playground. Defaults (python + check) collapse to a clean
+    // /playground with no query. ?share=ID is dropped after replay so
+    // the URL reflects current state, not how the snapshot was loaded.
+    var qs = new URLSearchParams(window.location.search);
+    qs.delete('share');
+    if (state.language && state.language !== 'python') {
+      qs.set('lang', state.language);
+    } else {
+      qs.delete('lang');
+    }
+    if (state.mode === 'diff') {
+      qs.set('mode', 'diff');
+    } else {
+      qs.delete('mode');
+    }
+    var query = qs.toString();
+    var target = '/playground' + (query ? ('?' + query) : '');
+    var current = window.location.pathname + window.location.search;
+    if (current !== target) {
       try {
-        window.history.replaceState({}, '', path);
+        window.history.replaceState({}, '', target);
       } catch (_e) { /* older browsers */ }
     }
   }
 
   function readUrlIntoState() {
+    // Honor query params first (canonical), then fall back to legacy
+    // path-segment URLs for backward compatibility with any external
+    // links already in the wild.
+    var qs = new URLSearchParams(window.location.search);
+    var lang = qs.get('lang');
+    var mode = qs.get('mode');
+    if (lang === 'python' || lang === 'rust' || lang === 'go') {
+      state.language = lang;
+    }
+    if (mode === 'diff') {
+      state.mode = 'diff';
+    }
     var p = window.location.pathname;
     if (p === '/playground/diff') {
       state.mode = 'diff';
