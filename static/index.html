@@ -205,12 +205,13 @@
       border-radius: 3px;
       padding: 1rem 1.15rem;
       margin: 1.5rem 0 2rem;
-      max-width: 60ch;
+      max-width: 100%;
       font-family: var(--fm);
       font-size: 0.86rem;
       color: var(--ink);
-      white-space: pre;
-      overflow-x: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .install-block .prompt { color: var(--muted); user-select: none; }
     .install-block .comment { color: var(--muted); }
@@ -433,6 +434,7 @@
         <li><a href="#install">Install</a></li>
         <li><a href="#verdicts">Verdicts</a></li>
         <li><a href="#research">Research</a></li>
+        <li><a href="/playground">Playground</a></li>
         <li><a href="/demo">Live demo</a></li>
       </ul>
     </aside>
@@ -496,7 +498,8 @@
 <span class="prompt">$ </span>python -m furqan check examples/clean_module.furqan</div><!--/email_off-->
 
         <div class="cta-row">
-          <a class="cta cta-primary" href="/demo">Run the live demo</a>
+          <a class="cta cta-primary" href="/playground">Open the playground</a>
+          <a class="cta cta-secondary" href="/demo">Run the live demo</a>
           <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">View on GitHub</a>
           <a class="cta cta-secondary" href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Read the paper</a>
         </div>
