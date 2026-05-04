@@ -1,9 +1,23 @@
 # tryfurqan.com runtime requirements.
 #
-# Furqan itself is pinned to v0.10.1, installed from the canonical
-# GitHub repo. Phase 2 has zero runtime dependencies of its own; the
-# pin is by tag so deploys are reproducible.
+# Pinned to release tags so deploys are reproducible. When furqan and
+# furqan-lint publish to PyPI in lockstep we will swap these git+ URLs
+# for plain version pins; until then the tags are the source of truth.
+#
+# Install order matters: pip resolves furqan-lint's `furqan>=0.11.0`
+# requirement against the explicit `furqan @ ...@v0.11.1` line below,
+# so the two pins stay coherent.
+#
+# `furqan-lint[go,rust]` pulls in:
+#   - Go toolchain at install time (PEP 517 hook builds goast). See
+#     nixpacks.toml for the Railway-side toolchain installation.
+#   - tree-sitter and tree-sitter-rust pure-Python wheels (no native
+#     toolchain needed at install time).
+# Without [go] or [rust], the corresponding tab raises
+# GoExtrasNotInstalled / RustExtrasNotInstalled at runtime; we want
+# both adapters live, so both extras stay pinned.
 fastapi==0.118.0
 uvicorn[standard]==0.32.0
 pydantic==2.9.2
-furqan @ git+https://github.com/BayyinahEnterprise/furqan-programming-language.git@v0.10.1
+furqan @ git+https://github.com/BayyinahEnterprise/furqan-programming-language.git@v0.11.1
+furqan-lint[go,rust] @ git+https://github.com/BayyinahEnterprise/furqan-lint.git@v0.8.5

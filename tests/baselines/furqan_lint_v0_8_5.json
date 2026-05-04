@@ -1,0 +1,40 @@
+{
+  "_comment": "Per-version fixture baseline gate. This file pins the expected verdict for every playground fixture against a specific furqan-lint version. When upgrading furqan-lint, copy this file to a new versioned baseline (e.g. furqan_lint_v0_9_0.json), re-run the harness with --update, and review the diff. The diff IS the upgrade audit.",
+  "furqan_lint_version": "0.8.5",
+  "captured_at": "2026-05-04",
+  "captured_against": "furqan-lint==0.8.5 + furqan==0.11.1",
+  "fixtures": {
+    "check": {
+      "python": {
+        "py-clean":           {"verdict": "pass",        "exit_code": 0},
+        "py-status-collapse": {"verdict": "marad",       "exit_code": 1},
+        "py-parse-error":     {"verdict": "parse_error", "exit_code": 2},
+        "py-no-may-fail":     {"verdict": "pass",        "exit_code": 0}
+      },
+      "rust": {
+        "rs-clean":           {"verdict": "pass",        "exit_code": 0},
+        "rs-unwrap-collapse": {"verdict": "marad",       "exit_code": 1},
+        "rs-parse-error":     {"verdict": "parse_error", "exit_code": 2}
+      },
+      "go": {
+        "go-clean":           {"verdict": "pass",        "exit_code": 0},
+        "go-blank-collapse":  {"verdict": "marad",       "exit_code": 1},
+        "go-parse-error":     {"verdict": "parse_error", "exit_code": 2}
+      }
+    },
+    "diff": {
+      "python": {
+        "py-additive-pass":   {"verdict": "pass",  "exit_code": 0},
+        "py-additive-marad":  {"verdict": "marad", "exit_code": 1}
+      },
+      "rust": {
+        "rs-additive-pass":   {"verdict": "pass",  "exit_code": 0},
+        "rs-additive-marad":  {"verdict": "marad", "exit_code": 1}
+      },
+      "go": {
+        "go-additive-pass":   {"verdict": "pass",  "exit_code": 0},
+        "go-additive-marad":  {"verdict": "marad", "exit_code": 1}
+      }
+    }
+  }
+}

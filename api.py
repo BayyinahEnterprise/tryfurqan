@@ -1,4 +1,4 @@
-"""tryfurqan.com — landing + live demo for the Furqan type-checker.
+"""tryfurqan.com - landing + live demo for the Furqan type-checker.
 
 The site has two surfaces:
 
@@ -48,6 +48,8 @@ from typing import Any
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
+
+from playground import playground_router
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -152,7 +154,7 @@ def demo_fixture(name: str) -> FileResponse:
 
 
 # ---------------------------------------------------------------------------
-# /demo/check — sandboxed execution
+# /demo/check - sandboxed execution
 # ---------------------------------------------------------------------------
 
 class CheckRequest(BaseModel):
@@ -283,3 +285,30 @@ def demo_check(req: CheckRequest) -> JSONResponse:
     """
     result = _run_check(req.source)
     return JSONResponse(content=result)
+
+
+# ---------------------------------------------------------------------------
+# /playground/* - live furqan-lint sandbox (Python, Rust, Go).
+# ---------------------------------------------------------------------------
+
+app.include_router(playground_router)
+
+
+@app.get("/playground", response_class=HTMLResponse)
+@app.get("/playground/python", response_class=HTMLResponse)
+@app.get("/playground/rust", response_class=HTMLResponse)
+@app.get("/playground/go", response_class=HTMLResponse)
+@app.get("/playground/diff", response_class=HTMLResponse)
+def playground_page() -> HTMLResponse:
+    """Editorial playground page. The client reads the URL pathname
+    to choose the initial active tab; the server returns the same
+    HTML for every deep link."""
+    html = (_STATIC_DIR / "playground.html").read_text(encoding="utf-8")
+    return HTMLResponse(content=html, headers=_NO_CACHE_HEADERS)
+
+
+@app.get("/playground/playground.js")
+def playground_js() -> FileResponse:
+    return FileResponse(
+        _STATIC_DIR / "playground.js", media_type="application/javascript"
+    )
