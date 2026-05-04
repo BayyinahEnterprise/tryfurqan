@@ -1,0 +1,17 @@
+# Railway nixpacks configuration for tryfurqan.
+#
+# The only non-default piece here is the Go toolchain. furqan-lint[go]
+# ships a PEP 517 build hook that runs `go build` to produce the
+# bundled goast binary; without `go` on PATH at install time the wheel
+# still installs (per the hook's fail-soft posture) but the Go tab in
+# /playground raises GoExtrasNotInstalled at runtime.
+#
+# Python 3.11 is selected by runtime.txt; nixpacks's auto-detected
+# Python provider handles venv + `pip install -r requirements.txt`.
+# We only extend the setup phase with `go`. `gcc` is included because
+# Go's CGO path occasionally needs it for net/cgo on linux/amd64
+# even though our binary is pure-Go - belt-and-suspenders for the
+# build phase.
+
+[phases.setup]
+nixPkgs = ["...", "go", "gcc"]

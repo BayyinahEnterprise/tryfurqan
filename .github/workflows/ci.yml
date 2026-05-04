@@ -1,0 +1,66 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Go 1.23
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Verify furqan-lint runtime present
+        run: |
+          furqan-lint version
+          # Fail fast if the [go] adapter is broken at install time.
+          python -c "from furqan_lint.go_adapter import parse_file; print('go adapter ok')"
+
+      - name: Run test suite (37 tests, includes baseline gate)
+        run: pytest tests/ -v
+
+      - name: Smoke test the live server
+        run: |
+          # Start the server in the background, hit each endpoint,
+          # then shut it down. The /healthz route must return 200
+          # and the /playground route must serve HTML.
+          uvicorn api:app --host 127.0.0.1 --port 7401 &
+          SERVER_PID=$!
+          # Wait up to 10s for readiness.
+          for i in {1..20}; do
+            if curl -sf http://127.0.0.1:7401/healthz >/dev/null; then
+              break
+            fi
+            sleep 0.5
+          done
+          curl -sf http://127.0.0.1:7401/healthz | grep -q '"status":"ok"'
+          curl -sf -o /dev/null -w "%{http_code}\n" http://127.0.0.1:7401/playground | grep -q '^200$'
+          curl -sf -o /dev/null -w "%{http_code}\n" http://127.0.0.1:7401/playground/python | grep -q '^200$'
+          curl -sf -o /dev/null -w "%{http_code}\n" http://127.0.0.1:7401/playground/diff | grep -q '^200$'
+          curl -sf -o /dev/null -w "%{http_code}\n" http://127.0.0.1:7401/playground/playground.js | grep -q '^200$'
+          # POST /playground/check with a known MARAD shape.
+          curl -sf -X POST http://127.0.0.1:7401/playground/check \
+            -H 'Content-Type: application/json' \
+            -d '{"language":"python","source":"def g(u: int) -> str | None:\n    return None\n\ndef s(u: int) -> bool:\n    e: str = g(u)\n    return True\n"}' \
+            | python -c "import json,sys; r=json.load(sys.stdin); assert r['verdict']=='marad', r; print('marad ok')"
+          kill $SERVER_PID
