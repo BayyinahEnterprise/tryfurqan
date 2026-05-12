@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Furqan: A Programming-Language Type-Checker for Structural Honesty</title>
+  <title>furqan-lint v1.0.0: Structural-Honesty Checks for Python, Rust, and Go</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="description" content="Furqan is a programming-language type-checker that rejects code shapes which promise more than the program can actually deliver. Compile-time, deterministic, no model in the loop.">
+  <meta name="description" content="furqan-lint v1.0.0 (al-Basirah) is a static checker for Python, Rust, and Go that rejects function shapes whose signature is wider than what the body can honestly return. Compile-time, deterministic, no model in the loop. Self-attests its own release with Sigstore.">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Furqan">
-  <meta property="og:title" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
-  <meta property="og:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. Furqan makes that shape uncompilable.">
+  <meta property="og:site_name" content="furqan-lint">
+  <meta property="og:title" content="furqan-lint v1.0.0: Structural-Honesty Checks for Python, Rust, and Go">
+  <meta property="og:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. furqan-lint makes that shape uncompilable -- now across three languages, with a release that attests itself.">
   <meta property="og:url" content="https://tryfurqan.com/">
   <meta property="og:image" content="https://tryfurqan.com/og-tryfurqan.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
+  <meta property="og:image:alt" content="furqan-lint v1.0.0: Structural-Honesty Checks for Python, Rust, and Go">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Furqan: A Programming-Language Type-Checker for Structural Honesty">
-  <meta name="twitter:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. Furqan makes that shape uncompilable.">
+  <meta name="twitter:title" content="furqan-lint v1.0.0: Structural-Honesty Checks for Python, Rust, and Go">
+  <meta name="twitter:description" content="A meaningful fraction of code-level AI hallucination has the same shape as a long-known software defect. furqan-lint makes that shape uncompilable -- now across three languages, with a release that attests itself.">
   <meta name="twitter:image" content="https://tryfurqan.com/og-tryfurqan.png">
 
   <!-- Privacy-friendly analytics by Plausible -->
@@ -421,36 +421,39 @@
   <div class="page">
 
     <aside class="margin-index">
-      <div class="brand-mark"><a href="/">furqan</a></div>
+      <div class="brand-mark"><a href="/">furqan-lint</a></div>
 
-      <div class="meta-row"><span class="k">Phase</span><span class="v">3</span></div>
-      <div class="meta-row"><span class="k">Version</span><span class="v">v0.10.1</span></div>
-      <div class="meta-row"><span class="k">Tests</span><span class="v">527</span></div>
-      <div class="meta-row" title="9 of 10 checker modules run in single-file mode. The additive checker requires a prior version for comparison."><span class="k">Checkers</span><span class="v">9 / 10</span></div>
-      <div class="meta-row"><span class="k">Deps</span><span class="v">0</span></div>
+      <div class="meta-row"><span class="k">Phase</span><span class="v">G12.0 al-Basirah</span></div>
+      <div class="meta-row"><span class="k">Version</span><span class="v">v1.0.0</span></div>
+      <div class="meta-row"><span class="k">Languages</span><span class="v">Py / Rs / Go</span></div>
+      <div class="meta-row"><span class="k">Tests</span><span class="v">732</span></div>
+      <div class="meta-row" title="furqan-lint v1.0.0 signs its own release with Sigstore and exposes verification through `furqan-lint manifest verify-self`."><span class="k">Attests</span><span class="v">Self</span></div>
 
       <ul class="nav-list">
         <li><a href="#thesis">Thesis</a></li>
         <li><a href="#install">Install</a></li>
+        <li><a href="#checks">Checks</a></li>
         <li><a href="#verdicts">Verdicts</a></li>
-        <li><a href="#research">Research</a></li>
+        <li><a href="#self-attestation">Self-attestation</a></li>
         <li><a href="/playground">Playground</a></li>
-        <li><a href="/demo">Live demo</a></li>
+        <li><a href="#sister-substrate">Furqan language</a></li>
+        <li><a href="#research">Research</a></li>
       </ul>
     </aside>
 
     <main>
 
       <section id="hero">
-        <div class="section-mark">&sect; Furqan<span class="sep">&middot;</span>Honest by Construction</div>
+        <div class="section-mark">&sect; furqan-lint v1.0.0<span class="sep">&middot;</span>al-Basirah &middot; Honest by Construction</div>
 
-        <h1>Code that <em>promises more than it can deliver</em>, refused at compile time.</h1>
+        <h1>Code that <em>promises more than it can deliver</em>, refused at check time.</h1>
 
         <p class="lede">
-          Furqan is a programming-language type-checker. It rejects function
-          shapes whose signature is wider than what the body can honestly
-          return. The discipline is static, syntactic, deterministic, and
-          runs in milliseconds with no model in the loop.
+          furqan-lint is a static checker for Python, Rust, and Go. It rejects
+          function shapes whose signature is wider than what the body can
+          honestly return. The discipline is syntactic, deterministic, runs
+          in milliseconds with no model in the loop, and -- as of v1.0.0 --
+          attests its own release.
         </p>
       </section>
 
@@ -462,23 +465,27 @@
             A meaningful fraction of code-level "AI hallucination" has the
             same shape as a long-known software defect: a function declares
             it returns a complete answer about an input the program cannot
-            fully process. Furqan makes that shape <strong>structurally
-            uncompilable.</strong>
+            fully process. furqan-lint makes that shape
+            <strong>structurally rejectable</strong> on existing Python,
+            Rust, and Go code -- no language migration required.
           </p>
           <p>
-            When a function declares it returns <code>Integrity</code> but
-            the input may be unreadable (an encrypted PDF, a partial scan, a
-            missing field), the function must either rule out the
-            unreadability before promising completeness, or return an
-            <code>Incomplete</code> result with a reason and a confidence
-            bound. Most languages do not enforce this. Furqan does.
+            When a Python function returns <code>Optional[X]</code> and the
+            caller silently narrows it to <code>X</code>, that is the
+            structural equivalent of dropping the <code>Incomplete</code>
+            arm of an <code>Integrity | Incomplete</code> union. The same
+            shape appears as <code>Result&lt;T, E&gt;</code> in Rust and
+            <code>(T, error)</code> in Go. Most checkers do not enforce
+            this across language boundaries. furqan-lint does.
           </p>
           <p>
-            Nine checkers run in sequence: bismillah scope, zahir/batin,
-            mizan calibration, tanzil build ordering, ring-close,
-            scan-incomplete, status-coverage, return-type-match, and
-            all-paths-return. Diagnostics name the rule violated, the line
-            it occurred on, and the minimal fix.
+            The core checks run on every file: <strong>D24</strong>
+            (all-paths-return), <strong>D11</strong> (status-coverage),
+            <strong>return_none_mismatch</strong>, and -- via
+            <code>furqan-lint diff</code> -- <strong>additive_only</strong>
+            across two versions of a module's public surface. Diagnostics
+            name the rule violated, the producer, the consumer, and the
+            minimal fix.
           </p>
         </div>
       </section>
@@ -486,22 +493,78 @@
       <section id="install">
         <div class="section-mark">&sect; Install</div>
 
-        <h2>One <em>pip install</em>, no runtime dependencies.</h2>
+        <h2>One <em>pip install</em>, three languages, zero models.</h2>
 
-        <!--email_off--><div class="install-block"><span class="prompt">$ </span>pip install git+https://github.com/BayyinahEnterprise/furqan-programming-language@v0.10.1
+        <!--email_off--><div class="install-block"><span class="comment"># Python only, from a tag</span>
+<span class="prompt">$ </span>pip install "git+https://github.com/BayyinahEnterprise/furqan-lint.git@v1.0.0"
 
-<span class="comment"># or, from a clone</span>
-<span class="prompt">$ </span>git clone https://github.com/BayyinahEnterprise/furqan-programming-language
-<span class="comment"># pin to a specific tag with: git checkout v0.10.1</span>
-<span class="prompt">$ </span>cd furqan-programming-language
-<span class="prompt">$ </span>pip install -e .
-<span class="prompt">$ </span>python -m furqan check examples/clean_module.furqan</div><!--/email_off-->
+<span class="comment"># Add Rust + Go adapters</span>
+<span class="prompt">$ </span>pip install "furqan-lint[rust,go] @ git+https://github.com/BayyinahEnterprise/furqan-lint.git@v1.0.0"
+
+<span class="comment"># Run the four core Python checks</span>
+<span class="prompt">$ </span>furqan-lint check src/your_module.py
+
+<span class="comment"># Lint Rust and Go through the same CLI</span>
+<span class="prompt">$ </span>furqan-lint check src/lib.rs
+<span class="prompt">$ </span>furqan-lint check pkg/main.go
+
+<span class="comment"># Compare two versions of a module's public surface</span>
+<span class="prompt">$ </span>furqan-lint diff old.py new.py
+
+<span class="comment"># Verify the installed wheel against the signed self-manifest (v1.0+)</span>
+<span class="prompt">$ </span>furqan-lint manifest verify-self</div><!--/email_off-->
 
         <div class="cta-row">
           <a class="cta cta-primary" href="/playground">Open the playground</a>
-          <a class="cta cta-secondary" href="/demo">Run the live demo</a>
-          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">View on GitHub</a>
-          <a class="cta cta-secondary" href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Read the paper</a>
+          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-lint" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="cta cta-secondary" href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Read the papers</a>
+          <a class="cta cta-secondary" href="https://bayyinah.dev" target="_blank" rel="noopener">Sister: Bayyinah</a>
+        </div>
+      </section>
+
+      <section id="checks">
+        <div class="section-mark">&sect; Checks</div>
+
+        <h2>Four core checks. <em>One adapter per language.</em></h2>
+
+        <div class="body-copy">
+          <p>
+            The same checker substrate runs on Python, Rust, and Go. Each
+            check names a structural failure mode that has appeared in
+            published incident reports and in the audit chain that backs
+            this release.
+          </p>
+        </div>
+
+        <div class="verdict-table">
+          <div class="verdict-row">
+            <span class="verdict-tag pass">D24</span>
+            <span class="verdict-action"><strong>all-paths-return.</strong> Every control-flow path through a typed function reaches a return statement. Ships on Python, Rust, and Go.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">D11</span>
+            <span class="verdict-action"><strong>status-coverage.</strong> A may-fail union (<code>Optional[X]</code>, <code>Result&lt;T, E&gt;</code>, <code>(T, error)</code>) returned by a callee must be propagated or explicitly handled by every caller. Ships on Python, Rust, and Go.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">return_none_mismatch</span>
+            <span class="verdict-action"><strong>Closes the D24 return-None blind spot.</strong> A function declaring <code>-&gt; str</code> that returns <code>None</code> on some path is flagged as a type mismatch.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">additive_only</span>
+            <span class="verdict-action"><strong>Public-surface discipline.</strong> <code>furqan-lint diff old new</code> fires on any removed public name. Adding a public name is silent.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">R3 (Rust)</span>
+            <span class="verdict-action"><strong>ring-close.</strong> Zero-return discipline on annotated Rust functions, derived from upstream Furqan <code>check_ring_close</code>.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">ONNX suite</span>
+            <span class="verdict-action"><strong>Optional extras.</strong> D24-onnx, opset_compliance, D11-onnx (graph), numpy_divergence (runtime), score_validity (profile) for ML model artifacts.</span>
+          </div>
+          <div class="verdict-row">
+            <span class="verdict-tag pass">Gate 11</span>
+            <span class="verdict-action"><strong>Sigstore-CASM verifier.</strong> Additive-only public-surface contract cryptographically witnessed via Sigstore Rekor. The substrate the self-attestation rides on.</span>
+          </div>
         </div>
       </section>
 
@@ -520,20 +583,104 @@
         <div class="verdict-table">
           <div class="verdict-row">
             <span class="verdict-tag pass">PASS</span>
-            <span class="verdict-action"><strong>All nine checkers ran.</strong> Zero marads, zero advisories. The module is structurally honest.</span>
+            <span class="verdict-action"><strong>All applicable checks ran.</strong> Zero marads, zero advisories. The module is structurally honest at the level the checker sees.</span>
           </div>
           <div class="verdict-row">
             <span class="verdict-tag marad">MARAD</span>
-            <span class="verdict-action"><strong>At least one structural violation.</strong> Each marad names the checker, the diagnosis, and the minimal fix.</span>
+            <span class="verdict-action"><strong>At least one structural violation.</strong> Each marad names the check, the producer, the consumer, and the minimal fix.</span>
           </div>
           <div class="verdict-row">
             <span class="verdict-tag advisory">ADVISORY</span>
-            <span class="verdict-action"><strong>Informational findings only.</strong> The module passes, but the compiler has notes worth reading.</span>
+            <span class="verdict-action"><strong>Informational findings only.</strong> The module passes, but the checker has notes worth reading (used by ONNX profile checks).</span>
           </div>
           <div class="verdict-row">
             <span class="verdict-tag parse">PARSE ERROR</span>
-            <span class="verdict-action"><strong>The source could not be parsed.</strong> Reported with line and column. No checker runs on a broken AST.</span>
+            <span class="verdict-action"><strong>The source could not be parsed.</strong> Reported with line and column. No check runs on a broken AST.</span>
           </div>
+        </div>
+      </section>
+
+      <section id="self-attestation">
+        <div class="section-mark">&sect; Self-attestation<span class="sep">&middot;</span>v1.0+</div>
+
+        <h2>The tool that catches drift in others' code <em>attests its own</em>.</h2>
+
+        <div class="body-copy">
+          <p>
+            v1.0.0 closes a canonical chain that started at G10.5 al-Mubin
+            (v0.11.1) and ran through at-Tawbah, al-Hujurat, as-Saff,
+            al-Mursalat, an-Naziat (v0.13.0), and Tasdiq al-Bayan
+            (v0.14.0). The closing move: furqan-lint signs its own release
+            with Sigstore via ambient OIDC, publishes the signed
+            self-manifest as a Release asset, and exposes Relying-Party
+            verification through a CLI subcommand.
+          </p>
+          <p>
+            The self-manifest pins the source list of 24 substrate modules
+            (4 top-level checker substrate plus 20 gate11 substrate
+            including two new self-attestation modules) and binds them
+            with a Form A <strong>checker_set_hash</strong>. There are two
+            of these: a <strong>universal</strong> hash over all checker
+            substrate, and a <strong>self-attestation</strong> hash over
+            the pinned-self subset. Both are published in
+            <code>SAFETY_INVARIANTS.md</code> and verified at install time.
+          </p>
+          <p>
+            On the relying-party side, after <code>pip install</code>:
+          </p>
+        </div>
+
+        <!--email_off--><div class="install-block"><span class="prompt">$ </span>furqan-lint manifest verify-self
+<span class="comment"># Optionally pin the version under test</span>
+<span class="prompt">$ </span>furqan-lint manifest verify-self --version 1.0.0 --expected-identity \
+    https://github.com/BayyinahEnterprise/furqan-lint/.github/workflows/release.yml@refs/tags/v1.0.0</div><!--/email_off-->
+
+        <div class="body-copy">
+          <p>
+            A drift in any of the pinned source files, or a missing
+            self-manifest, or an unexpected signer identity, surfaces as
+            <strong>CASM-V-072</strong> (self-attestation-failure) with
+            one of three named sub-conditions: manifest-not-found,
+            checker-set-hash-drift, or signature-verification-unexpected.
+            The 732-test substrate (687 passing, 45 environment-gated)
+            covers the verification path end-to-end.
+          </p>
+          <p>
+            <strong>Honest asymmetries.</strong> Self-attestation ships on
+            the Python distribution. The Rust verifier substrate is part
+            of the Python wheel rather than a separate crate; the Go
+            self-attestation path is deferred. The published
+            <code>docs/gate11-symmetry.md</code> row records both.
+          </p>
+        </div>
+      </section>
+
+      <section id="sister-substrate">
+        <div class="section-mark">&sect; Sister substrate<span class="sep">&middot;</span>furqan (language)</div>
+
+        <h2>The language that <em>derived the architecture</em>.</h2>
+
+        <div class="body-copy">
+          <p>
+            <strong>furqan</strong> is the programming-language Phase 3
+            type-checker whose multi-checker pipeline -- bismillah scope,
+            zahir/batin, mizan calibration, tanzil build ordering,
+            ring-close, scan-incomplete, status-coverage,
+            return-type-match, all-paths-return -- is the substrate that
+            furqan-lint translates into idiomatic Python, Rust, and Go.
+            It is the research-language anchor; furqan-lint is the
+            production-language surface.
+          </p>
+          <p>
+            Most users do not need to install the language to use the
+            linter. The architecture-derivation paper is listed under
+            Research below.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">furqan on GitHub</a>
+          <a class="cta cta-secondary" href="/demo">Language demo</a>
         </div>
       </section>
 
@@ -544,15 +691,16 @@
 
         <div class="body-copy">
           <p>
-            Furqan is the architecture layer of a published research program.
-            <strong>The Munafiq Protocol names the failure mode</strong> RLHF
-            and Constitutional AI do not address: a system can be Compliant
-            without being Aligned. Furqan is the language that turns that
-            protocol into a compile-time check. The cross-text empirical
-            paper grounds both in measured structural properties of the
-            source corpus, not in metaphor. Every paper carries a permanent
-            Zenodo DOI and an auditable claim against a named null
-            hypothesis.
+            furqan-lint is the production-language surface of a published
+            research program. <strong>The Munafiq Protocol names the
+            failure mode</strong> RLHF and Constitutional AI do not
+            address: a system can be Compliant without being Aligned. The
+            Furqan language turns that protocol into compile-time checks,
+            and furqan-lint carries those checks into Python, Rust, and
+            Go. The cross-text empirical paper grounds both in measured
+            structural properties of the source corpus, not in metaphor.
+            Every paper carries a permanent Zenodo DOI and an auditable
+            claim against a named null hypothesis.
           </p>
         </div>
 
@@ -647,16 +795,20 @@
 
       <div class="footer-note">
         <p>
-          <strong>Furqan</strong> is the Phase 3 multi-module type-checker. It
-          enforces a minimal subset of the surface syntax against the
-          paper's structural-honesty primitives, with a cross-module build
-          graph for projects that span more than a single file. Zero runtime
-          dependencies, Python 3.10+, Apache-2.0 licensed.
+          <strong>furqan-lint v1.0.0 (al-Basirah).</strong> Structural-honesty
+          checks for Python, Rust, and Go, derived from the Furqan
+          programming language and published under Apache-2.0. Python
+          3.10+, runtime dependency on <code>furqan&gt;=0.11.0</code>,
+          optional adapters for Rust (<code>tree-sitter</code>), Go (Go 1.22+
+          toolchain at install time), and ONNX. v1.0.0 closes the canonical
+          mushaf substrate-chain at Phase G12.0; subsequent v1.x releases
+          are operational patches.
         </p>
         <p>
           Sister project: <a href="https://bayyinah.dev">Bayyinah</a>, the
           file-integrity scanner that applies the same discipline at the
-          input layer of an AI pipeline.
+          input layer of an AI pipeline. Both are projects of
+          BayyinahEnterprise.
         </p>
       </div>
 
