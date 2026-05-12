@@ -436,7 +436,7 @@
         <li><a href="#verdicts">Verdicts</a></li>
         <li><a href="#self-attestation">Self-attestation</a></li>
         <li><a href="/playground">Playground</a></li>
-        <li><a href="#sister-substrate">Furqan language</a></li>
+        <li><a href="#sister-substrate">Foundations</a></li>
         <li><a href="#research">Research</a></li>
       </ul>
     </aside>
@@ -516,8 +516,8 @@
 
         <div class="cta-row">
           <a class="cta cta-primary" href="/playground">Open the playground</a>
-          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-lint" target="_blank" rel="noopener">View on GitHub</a>
-          <a class="cta cta-secondary" href="https://zenodo.org/communities/bayyinah/" target="_blank" rel="noopener">Read the papers</a>
+          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-lint" target="_blank" rel="noopener">furqan-lint on GitHub</a>
+          <a class="cta cta-secondary" href="https://zenodo.org/records/20101580" target="_blank" rel="noopener">Read the white paper</a>
           <a class="cta cta-secondary" href="https://bayyinah.dev" target="_blank" rel="noopener">Sister: Bayyinah</a>
         </div>
       </section>
@@ -656,31 +656,35 @@
       </section>
 
       <section id="sister-substrate">
-        <div class="section-mark">&sect; Sister substrate<span class="sep">&middot;</span>furqan (language)</div>
+        <div class="section-mark">&sect; Foundations<span class="sep">&middot;</span>built upon the Furqan language</div>
 
-        <h2>The language that <em>derived the architecture</em>.</h2>
+        <h2>furqan-lint is <em>built upon</em> the Furqan programming language.</h2>
 
         <div class="body-copy">
           <p>
-            <strong>furqan</strong> is the programming-language Phase 3
-            type-checker whose multi-checker pipeline -- bismillah scope,
-            zahir/batin, mizan calibration, tanzil build ordering,
-            ring-close, scan-incomplete, status-coverage,
-            return-type-match, all-paths-return -- is the substrate that
-            furqan-lint translates into idiomatic Python, Rust, and Go.
-            It is the research-language anchor; furqan-lint is the
-            production-language surface.
+            The four checks that ship in furqan-lint (D24, D11,
+            <code>return_none_mismatch</code>, <code>additive_only</code>)
+            -- plus R3 on the Rust adapter -- are not bespoke heuristics.
+            They are translations of compile-time primitives from
+            <strong>Furqan</strong>, the research programming language
+            whose multi-checker pipeline (bismillah scope, zahir/batin,
+            mizan calibration, tanzil build ordering, ring-close,
+            scan-incomplete, status-coverage, return-type-match,
+            all-paths-return) defines the structural-honesty discipline.
           </p>
           <p>
-            Most users do not need to install the language to use the
-            linter. The architecture-derivation paper is listed under
-            Research below.
+            The language gives the discipline; furqan-lint carries it
+            into existing Python, Rust, and Go code -- no migration
+            required. You do not need to install Furqan to use
+            furqan-lint. The architecture-derivation paper is listed
+            under Research below; the Furqan repository is linked for
+            researchers who want the substrate directly.
           </p>
         </div>
 
         <div class="cta-row">
-          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">furqan on GitHub</a>
-          <a class="cta cta-secondary" href="/demo">Language demo</a>
+          <a class="cta cta-secondary" href="https://github.com/BayyinahEnterprise/furqan-programming-language" target="_blank" rel="noopener">Furqan language repo</a>
+          <a class="cta cta-secondary" href="/demo">Furqan language demo</a>
         </div>
       </section>
 
@@ -691,13 +695,13 @@
 
         <div class="body-copy">
           <p>
-            furqan-lint is the production-language surface of a published
-            research program. <strong>The Munafiq Protocol names the
-            failure mode</strong> RLHF and Constitutional AI do not
-            address: a system can be Compliant without being Aligned. The
-            Furqan language turns that protocol into compile-time checks,
-            and furqan-lint carries those checks into Python, Rust, and
-            Go. The cross-text empirical paper grounds both in measured
+            furqan-lint is the production surface of a published research
+            program. <strong>The Munafiq Protocol names the failure
+            mode</strong> RLHF and Constitutional AI do not address: a
+            system can be Compliant without being Aligned. The Furqan
+            language turns that protocol into compile-time checks, and
+            furqan-lint carries those checks into Python, Rust, and Go.
+            The cross-text empirical paper grounds both in measured
             structural properties of the source corpus, not in metaphor.
             Every paper carries a permanent Zenodo DOI and an auditable
             claim against a named null hypothesis.
@@ -705,6 +709,14 @@
         </div>
 
         <div class="papers-block">
+
+          <div class="layer-mark">furqan-lint white paper</div>
+
+          <article class="paper paper-anchor">
+            <h3 class="paper-title"><a href="https://zenodo.org/records/20101580" target="_blank" rel="noopener">furqan-lint: The Structural-Honesty Checks ruff and mypy Do Not Catch, Across Python, Rust, and Go (White Paper v1.0)</a></h3>
+            <div class="paper-meta">zenodo.org/records/20101580 &middot; v1.0 &middot; 2026-05-09 &middot; Bilal Syed Arfeen (BayyinahEnterprise)</div>
+            <p class="paper-abstract"><strong>The defining paper for this site.</strong> Names the gap between ruff (style), mypy (declared types), conventional security tooling, and the four structural-honesty shapes furqan-lint catches: Optional collapse through propagation across narrowing return-type annotations, silently-removed public names across versions, zero-return ring-close on unannotated or dynamically constructed functions, and explicit return-None mismatch on functions declared with non-Optional return types. Introduces the five checks (D24, D11, R3, return_none_mismatch, additive_only), the three language adapters (Python via ast, Rust via tree-sitter, Go via a goast binary), the three-line CI integration story, a worked example, and the application-fit profile for technical decision-makers.</p>
+          </article>
 
           <div class="layer-mark">Layer 1 &middot; The Protocol &amp; Its Empirical Foundation</div>
 
